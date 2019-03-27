@@ -99,7 +99,7 @@ impl DockerApiClient for DockerClient {
 
         let buf = request.as_bytes();
         match client.write_all(buf) {
-            Ok(_) => println!("Wrote all data to socket"),
+            Ok(_) => Debug!("Wrote all data to socket"),
             Err(_) => return None,
         };
 
