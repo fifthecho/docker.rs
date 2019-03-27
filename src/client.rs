@@ -104,7 +104,7 @@ impl DockerApiClient for DockerClient {
         };
 
         // Can't figure out why read_to_end was not working here. :/
-        const BUFFER_SIZE: usize = 1024;
+        const BUFFER_SIZE: usize = 20480;
         let mut buffer: [u8; BUFFER_SIZE] = [0; BUFFER_SIZE];
         let mut raw_resp: Vec<u8> = Vec::new();
         loop {
