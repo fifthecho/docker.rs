@@ -59,7 +59,7 @@ pub struct Mounts {
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct ContainerConfig {
     pub Image: String,
-    pub Cmd: Vec<String>,
+    // pub Cmd: Vec<String>,
 
     pub Hostname: String,
     pub Domainname: String,
@@ -71,7 +71,7 @@ pub struct ContainerConfig {
     pub OpenStdin: bool,
     pub StdinOnce: bool,
     pub Env: Vec<String>,
-    pub Entrypoint: Option<String>,
+    // pub Entrypoint: Option<String>,
     pub Labels: Option<HashMap<String, String>>,
     pub WorkingDir: String,
 }
@@ -301,20 +301,20 @@ pub trait Containers: DockerApiClient {
     ///     Err(err) => println!("An error occured : {}", err),
     /// }
     /// ```
-    fn create_container_minimal(
-        &self,
-        name: &str,
-        image: &str,
-        cmd: Vec<String>,
-    ) -> Result<CreateContainerResponse, DockerApiError> {
-        let config = ContainerConfig {
-            Image: image.to_string(),
-            Cmd: cmd,
-            ..Default::default()
-        };
+    // fn create_container_minimal(
+    //     &self,
+    //     name: &str,
+    //     image: &str,
+    //     cmd: Vec<String>,
+    // ) -> Result<CreateContainerResponse, DockerApiError> {
+    //     let config = ContainerConfig {
+    //         Image: image.to_string(),
+    //         Cmd: cmd,
+    //         ..Default::default()
+    //     };
 
-        self.create_container(name, config)
-    }
+    //     self.create_container(name, config)
+    // }
 
     /// Inspects the container with the provided ID
     /// Returns Low level information about the container.
@@ -356,8 +356,10 @@ pub trait Containers: DockerApiClient {
                 resp.body,
             ));
         }
+        let sanitized_body = resp.body.to_string().replace("null", r#""""#);
+        // println!("response: {:?}", sanitized_body);
 
-        match serde_json::from_str(&resp.body) {
+        match serde_json::from_str(&sanitized_body) {
             Ok(info) => Ok(info),
             Err(err) => Err(DockerApiError::JsonDeserializationError(err)),
         }

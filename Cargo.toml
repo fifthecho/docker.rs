@@ -1,10 +1,10 @@
 [package]
 name = "rust_docker"
-version = "0.1.1"
+version = "0.1.2"
 description = "A docker wrapper to interact with docker daemon."
 license = "MIT"
-authors = ["Deepesh Pathak <deepshpathak@gmail.com>"]
-repository = "https://github.com/fristonio/docker.rs.git"
+authors = ["Deepesh Pathak <deepshpathak@gmail.com>", "Jeff Moody <fifthecho@gmail.com>"]
+repository = "https://github.com/fifthecho/docker.rs.git"
 documentation = "https://docs.rs/rust_docker"
 readme = "README.md"
 keywords = ["docker", "api", "unix-sockets"]
